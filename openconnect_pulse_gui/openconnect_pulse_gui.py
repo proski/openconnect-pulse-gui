@@ -75,7 +75,7 @@ class PulseLoginView:  # pylint: disable=too-many-instance-attributes,too-few-pu
         self._webview = WebKit2.WebView()
         self._webview.connect("load-failed-with-tls-errors", self._tls_error)
 
-        self._window.resize(500, 500)
+        self._window.resize(960, 720)
         self._window.add(self._webview)
         self._window.set_title("Pulse Connect Login")
         self._window.connect("delete-event", self._user_close)
