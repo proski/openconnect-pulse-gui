@@ -74,7 +74,7 @@ class PulseLoginView:  # pylint: disable=too-many-instance-attributes,too-few-pu
             )
 
         self._webview = WebKit2.WebView()
-        self._webview.connect("load-failed-with-tls-errors", self._tls_error, None)
+        self._webview.connect("load-failed-with-tls-errors", self._tls_error)
 
         self._window.resize(500, 500)
         self._window.add(self._webview)
@@ -114,7 +114,7 @@ class PulseLoginView:  # pylint: disable=too-many-instance-attributes,too-few-pu
         resource.connect("finished", self._log_resource_details, (request_id, request))
         resource.connect("sent-request", self._log_sent_request, (request_id, request))
 
-    def _tls_error(self, _webview, failing_uri, _certificate, errors, _user_data):  # pylint: disable=too-many-arguments
+    def _tls_error(self, _webview, failing_uri, _certificate, errors):
         log.error(
             "TLS error on %s : %s. Use --insecure to bypass certificate validation.",
             failing_uri,
