@@ -41,7 +41,6 @@ class PulseLoginView:  # pylint: disable=too-many-instance-attributes,too-few-pu
     def __init__(  # pylint: disable=too-many-arguments
         self,
         uri,
-        html=None,
         verbose=False,
         cookies=None,
         verify=True,
@@ -87,10 +86,7 @@ class PulseLoginView:  # pylint: disable=too-many-instance-attributes,too-few-pu
 
         self._request_id = 0
 
-        if html:
-            self._webview.load_html(html, uri)
-        else:
-            self._webview.load_uri(uri)
+        self._webview.load_uri(uri)
 
     def _user_close(self, window, _event):
         self.user_closed = True
