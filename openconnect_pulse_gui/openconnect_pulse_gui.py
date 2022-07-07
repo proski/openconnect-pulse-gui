@@ -77,7 +77,6 @@ class PulseLoginView:  # pylint: disable=too-many-instance-attributes,too-few-pu
 
         self._window.resize(500, 500)
         self._window.add(self._webview)
-        self._window.show_all()
         self._window.set_title("Pulse Connect Login")
         self._window.connect("delete-event", self._user_close)
         self._window.connect("destroy", self._close)
@@ -87,6 +86,7 @@ class PulseLoginView:  # pylint: disable=too-many-instance-attributes,too-few-pu
         self._request_id = 0
 
         self._webview.load_uri(uri)
+        self._window.show_all()
 
     def _user_close(self, window, _event):
         self.user_closed = True
