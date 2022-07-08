@@ -41,7 +41,7 @@ class PulseLoginView:  # pylint: disable=too-many-instance-attributes,too-few-pu
     def __init__(  # pylint: disable=too-many-arguments
         self,
         uri,
-        verbose=False,
+        verbose=0,
         cookies=None,
         verify=True,
         session_cookie_name="DSID",
@@ -200,9 +200,7 @@ def parse_args(args=None, prog=None):
     exclusive_group.add_argument(
         "-q",
         "--quiet",
-        dest="verbose",
-        action="store_const",
-        const=0,
+        action="store_true",
         help="Reduce verbosity to a minimum",
     )
 
@@ -294,7 +292,9 @@ def main(prog=None):
     args = parse_args(prog=prog)
 
     log_levels = [logging.WARNING, logging.INFO, logging.DEBUG]
-    if args.verbose > 2:
+    if args.quiet:
+        log_level = logging.ERROR
+    elif args.verbose >= len(log_levels):
         log_level = log_levels[-1]
     else:
         log_level = log_levels[args.verbose]
